@@ -1,16 +1,16 @@
 
 #include <iostream>
-#include<string.h> 
+#include<cstdio> 
 using namespace std;
+char character ;
 
-
-   void mainmenu(void);
+   void mainmenu(char character);
    int main () 
- { char c;
-  cout<<"welcom";
- cout<<"bio*17 pharma store";
+ { 
+  cout<<"welcom\n";
+ cout<<"bio*17 pharma store\n";
 
- cout<<"***********************";
+ cout<<"***********************\n";
  
  
 
@@ -21,10 +21,10 @@ using namespace std;
  cout<<"for suppliers menu press S\n" ;
  
  cout<<"ENTER YOUR CHOICE";
- c=getchar();
+ character = getchar();
  
  
-  void mainmenu();
+  mainmenu(character);
  
  
  
@@ -34,25 +34,28 @@ using namespace std;
          
 
 
- void mainmenu(void){
- switch (c) {
-   case'c'||'C':
-   cout << "for new customer press N"endl;
-   cout<<" for current customer press U"endl;
-   
-  
-   break;
-   case'p'||'P':{
-   cout << "for new product press W"endl;
-   cout<<" for current product press E"endl;}
-   
-   break;
-   case's'||'S':{
-   cout<< "for new supplier press R"endl;
-   cout<<" for current supplier press T"endl;}
+ void mainmenu(char character) {
+ switch (character) {
+     case'C':
+     case 'c':
+     cout << "for new customer press N \n";
+     cout<<" for current customer press U\n\n";
     
-   break;
-  default:
-  cout<<"INVALIDE CHOICE,PLEASE TRY AGAIN";
   
- }
+     break;
+     case'P':
+     case'p':
+     cout << "for new product press W\n";
+     cout<<" for current product press E\n";
+   
+     break;
+     case'S':
+     case's':
+     cout << "for new supplier press R\n";
+     cout<<" for current supplier press T\n";
+    
+     break;
+     default:
+     cout<<"INVALIDE CHOICE,PLEASE TRY AGAIN";
+     break;
+    }}
