@@ -1,19 +1,17 @@
 #include<iostream>
 #include<string.h> 
-#include <conio.h>
-\\#include <windows.h>
+
+
 using namespace std;
 
- COORD coord={0,0}
- void gotoxy(int column,int row){
- coord.x=column;
- coord.y=line;
+ 
 
- setConsoleCursorPosition(GetStdHandle( STD_OUTPUT_HANDLE ),coord);
- void mainmenu();
+ 
  }
  int main{
- maimenu();
+ mainmenu();
+ 
+ 
  system ("pause");
 
  return 0;
@@ -24,21 +22,23 @@ void menu:: void mainmenu(){
  while (1)
  { 
  clrscr();
- gotoxy  (35,5)  ;
+
  cout<<"welcom"\n;
- gotoxy  (30,6)  ;
+
+
  cout<<bio*17 pharma store";
- gotoxy  (26,7)  ;
+
  cout<<"***********************";
- gotoxy  (7,13)  ;
- cout<< "for customers menu press Q"\n;
- cout <<"for products menu press W"\n;
- cout<<"for suppliers menu press E" \n;
- gotoxy  (7,20)  ;
+ 
+ cout<< "for customers menu press C"\n;
+ cout <<"for products menu press P"\n;
+ cout<<"for suppliers menu press S" \n;
+ 
  cout<<"ENTER YOUR CHOICE";
  c=getchar();
  switch(c) {
    case' Q'|'q':
+   
   
    break;
    case'W'|'w':
