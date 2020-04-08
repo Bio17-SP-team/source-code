@@ -1,60 +1,19 @@
 #include<iostream>
 #include<string.h> 
 #include <conio.h>
-#include <windows.h>
+\\#include <windows.h>
 using namespace std;
  \\to be completed
+ COORD coord={0,0}
  void gotoxy(int column,int row){
  coord.x=column;
  coord.y=line;
 
- etConsoleCursorPosition(GetStdHandle( STD_OUTPUT_HANDLE ),coord);
+ setConsoleCursorPosition(GetStdHandle( STD_OUTPUT_HANDLE ),coord);
  void mainmenu();
+ }
  int main{
- mainmenu();
- 
- 
- 
- void menu:: void mainmenu(){
-
- char C; 
- while (1)
- { 
- clrscr();
- gotoxy  (,)  ;
- cout<<"welcom"\n;
- cout<<bio*17 pharma store";
- cout<<"***********************";
- cout<< "for customers menu press Q"\n;
- cout <<"for products menu press W"\n;
- cout<<"for suppliers menu press E" \n;
- cout<<"ENTER YOUR CHOICE";
-  c=getchar();
-  switch(c)   {
-  case' Q'|'q':
-  
-  break;
-  case'W'|'w':
-  
-  break;
-  case'E'|'w':
-  
-  break;
-  default:
-  cou<<"INVALIDE CHOICE,PLEASE TRY AGAIN"
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+ maimenu();
  system ("pause");
 
  return 0;
@@ -65,13 +24,17 @@ void menu:: void mainmenu(){
  while (1)
  { 
  clrscr();
- gotoxy  (,)  ;
+ gotoxy  (35,5)  ;
  cout<<"welcom"\n;
+ gotoxy  (30,6)  ;
  cout<<bio*17 pharma store";
+ gotoxy  (26,7)  ;
  cout<<"***********************";
+ gotoxy  (,)  ;
  cout<< "for customers menu press Q"\n;
  cout <<"for products menu press W"\n;
  cout<<"for suppliers menu press E" \n;
+ gotoxy  (,)  ;
  cout<<"ENTER YOUR CHOICE";
   c=getchar();
   switch(c)   {
