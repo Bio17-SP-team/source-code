@@ -7,8 +7,8 @@ char character ;
    void mainmenu(char character);
    int main () 
  { 
-  cout<<"\t\t\twelcome\n";
- cout<<"\t\t\bio*17 pharma store\n";
+  cout<<"\t\t\t\twelcome\n";
+ cout<<"\t\t\tbio*17 pharma store\n";
 
  cout<<"***********************\n";
  
@@ -20,7 +20,7 @@ char character ;
  cout <<"for products menu press P\n";
  cout<<"for suppliers menu press S\n" ;
  
- cout<<"ENTER YOUR CHOICE";
+ cout<<"ENTER YOUR CHOICE :";
  character = getchar();
  
  
