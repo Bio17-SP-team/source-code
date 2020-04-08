@@ -3,7 +3,7 @@
 #include <conio.h>
 \\#include <windows.h>
 using namespace std;
- \\to be completed
+
  COORD coord={0,0}
  void gotoxy(int column,int row){
  coord.x=column;
@@ -20,7 +20,7 @@ using namespace std;
          }
 void menu:: void mainmenu(){
 
- char C; 
+ char c; 
  while (1)
  { 
  clrscr();
@@ -30,27 +30,26 @@ void menu:: void mainmenu(){
  cout<<bio*17 pharma store";
  gotoxy  (26,7)  ;
  cout<<"***********************";
- gotoxy  (,)  ;
+ gotoxy  (7,13)  ;
  cout<< "for customers menu press Q"\n;
  cout <<"for products menu press W"\n;
  cout<<"for suppliers menu press E" \n;
- gotoxy  (,)  ;
+ gotoxy  (7,20)  ;
  cout<<"ENTER YOUR CHOICE";
-  c=getchar();
-  switch(c)   {
-  case' Q'|'q':
+ c=getchar();
+ switch(c) {
+   case' Q'|'q':
   
-  break;
-  case'W'|'w':
+   break;
+   case'W'|'w':
   
-  break;
-  case'E'|'w':
+   break;
+   case'E'|'w':
   
-  break;
+   break;
   default:
-  cou<<"INVALIDE CHOICE,PLEASE TRY AGAIN"
+  cou<<"INVALIDE CHOICE,PLEASE TRY AGAIN";
   
- 
  }
  
  
