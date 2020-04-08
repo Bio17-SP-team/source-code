@@ -1,60 +1,58 @@
-#include<iostream>
+
+#include <iostream>
 #include<string.h> 
-
-
 using namespace std;
 
+
+   void mainmenu(void);
+   int main () 
+ { char c;
+  cout<<"welcom";
+ cout<<"bio*17 pharma store";
+
+ cout<<"***********************";
+ 
  
 
  
- }
- int main{
- mainmenu();
+ 
+ cout<< "for customers menu press C \n";
+ cout <<"for products menu press P\n";
+ cout<<"for suppliers menu press S\n" ;
+ 
+ cout<<"ENTER YOUR CHOICE";
+ c=getchar();
+ 
+ 
+  void mainmenu();
+ 
  
  
  system ("pause");
 
- return 0;
-         }
-void menu:: void mainmenu(){
-
- char c; 
- while (1)
- { 
- clrscr();
-
- cout<<"welcom"\n;
+}
+         
 
 
- cout<<bio*17 pharma store";
-
- cout<<"***********************";
- 
- cout<< "for customers menu press C"\n;
- cout <<"for products menu press P"\n;
- cout<<"for suppliers menu press S" \n;
- 
- cout<<"ENTER YOUR CHOICE";
- c=getchar();
- switch(c) {
-   case' Q'|'q':
+ void mainmenu(void){
+ switch (c) {
+   case'c'||'C':
+   cout << "for new customer press N"endl;
+   cout<<" for current customer press U"endl;
    
   
    break;
-   case'W'|'w':
-  
+   case'p'||'P':{
+   cout << "for new product press W"endl;
+   cout<<" for current product press E"endl;}
+   
    break;
-   case'E'|'w':
-  
+   case's'||'S':{
+  cout << "for new supplier press R"endl;
+   cout<<" for current supplier press T"endl;}
+    
    break;
   default:
   cou<<"INVALIDE CHOICE,PLEASE TRY AGAIN";
   
- }
- 
- 
- 
- void main(void){
- crlscr();
- m.mainmenu();
  }
