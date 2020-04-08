@@ -48,11 +48,11 @@ using namespace std;
    
    break;
    case's'||'S':{
-  cout << "for new supplier press R"endl;
+   cout<< "for new supplier press R"endl;
    cout<<" for current supplier press T"endl;}
     
    break;
   default:
-  cou<<"INVALIDE CHOICE,PLEASE TRY AGAIN";
+  cout<<"INVALIDE CHOICE,PLEASE TRY AGAIN";
   
  }
