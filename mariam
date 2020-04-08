@@ -7,7 +7,7 @@ char character ;
    void mainmenu(char character);
    int main () 
  { 
-  cout<<"\t\t\twelcom\n";
+  cout<<"\t\t\twelcome\n";
  cout<<"\t\t\bio*17 pharma store\n";
 
  cout<<"***********************\n";
