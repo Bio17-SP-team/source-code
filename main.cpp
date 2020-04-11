@@ -28,9 +28,9 @@ struct Date {
 
 struct Customer {
 	idcust IDcust;
-	char Name[50] = "";
+	string Name;
 	int Phone = 0;
-	char purchasedProducts[100] = "";
+	string purchasedProducts;
 	Date dateOfLastBill;
 	int its_value = 0;
 	int totalPriceOfBoughtProductsPerWeek = 0;
@@ -40,23 +40,151 @@ Customer new_customer[100];
 
 struct Supplier {
 	idsup IDsup;
-	char Name[50] = "";
+	string Name;
 	int Phone = 0;
-	char suppliedMedicalProduct[50] = "";
+	string suppliedMedicalProduct;
 };
 
 Supplier new_supplier[100];
 
 struct MedicalSupply {
     idmed IDmed;
-    char Name[50] = "";
+    string Name;
     Date expiryDate;
-    char SupplierName[50] = "";
+    string SupplierName;
     int Stock = 0;
     int Price = 0;
 };
 
 MedicalSupply new_medicalsupply[100];
+
+void add_customer() {
+    ofstream cf;
+    cf.open("customer.txt", ios::app);
+	new_customer[custcounter - 1].IDcust.no = custcounter;
+	cout << new_customer[custcounter - 1].IDcust.U << new_customer[custcounter - 1].IDcust.no << endl;
+    cf << new_customer[custcounter - 1].IDcust.U << new_customer[custcounter - 1].IDcust.no << endl;
+	cout << "Enter customer name : ";
+	getline (cin, new_customer[custcounter - 1].Name);
+    cf << new_customer[custcounter - 1].Name << endl;
+	cout << "Enter phone number : ";
+	cin >> new_customer[custcounter - 1].Phone;
+	cin.ignore();
+    cf << new_customer[custcounter - 1].Phone << endl;
+	cout << "Enter purchase products : ";
+	getline (cin, new_customer[custcounter - 1].purchasedProducts);
+    cf << new_customer[custcounter - 1].purchasedProducts << endl;
+	cout << "Enter date of last bill : ";
+	cin >> new_customer[custcounter - 1].dateOfLastBill.Day >> new_customer[custcounter - 1].dateOfLastBill.Month >> new_customer[custcounter - 1].dateOfLastBill.Year;
+    cf << new_customer[custcounter - 1].dateOfLastBill.Day << " " << new_customer[custcounter - 1].dateOfLastBill.Month << " " << new_customer[custcounter - 1].dateOfLastBill.Year << endl;
+	cout << "Enter its value : ";
+	cin >> new_customer[custcounter - 1].its_value;
+    cf << new_customer[custcounter - 1].its_value << endl;
+	cout << "Enter total price of bought products/week : ";
+	cin >> new_customer[custcounter - 1].totalPriceOfBoughtProductsPerWeek;
+    cf << new_customer[custcounter - 1].totalPriceOfBoughtProductsPerWeek << endl;
+    cf.close();
+    cout << endl;
+	custcounter++;
+}
+
+void add_supplier() {
+    ofstream cf;
+    cf.open("supplier.txt", ios::app);
+    new_supplier[supcounter - 1].IDsup.no = supcounter;
+    cf << new_supplier[supcounter - 1].IDsup.U << new_supplier[supcounter - 1].IDsup.no << endl;
+    cout << new_supplier[supcounter - 1].IDsup.U << new_supplier[supcounter - 1].IDsup.no << endl;
+    cout << "Enter supplier name : ";
+    getline(cin, new_supplier[supcounter - 1].Name);
+    cf << new_supplier[supcounter - 1].Name << endl;
+    cout << "Enter phone number : ";
+    cin >> new_supplier[supcounter - 1].Phone;
+    cf << new_supplier[supcounter - 1].Phone << endl;
+    cin.ignore();
+    cout << "Enter supplied products : ";
+    getline(cin, new_supplier[supcounter - 1].suppliedMedicalProduct);
+    cf << new_supplier[supcounter - 1].suppliedMedicalProduct << endl;
+    cout << endl;
+    supcounter++;
+}
+
+void add_medicalsupply() {
+    ofstream cf;
+    cf.open("medical_supply.txt", ios::app);
+    new_medicalsupply[medcounter - 1].IDmed.no = medcounter;
+    cf << new_medicalsupply[medcounter - 1].IDmed.U << new_medicalsupply[medcounter - 1].IDmed.no << endl;
+    cout << new_medicalsupply[medcounter - 1].IDmed.U << new_medicalsupply[medcounter - 1].IDmed.no << endl;
+    cout << "Enter medical supply name : ";
+    getline(cin, new_medicalsupply[medcounter - 1].Name);
+    cf << new_medicalsupply[medcounter - 1].Name << endl;
+    cout << "Enter date of expiry : ";
+    cin >> new_medicalsupply[medcounter - 1].expiryDate.Day >> new_medicalsupply[medcounter - 1].expiryDate.Month >> new_medicalsupply[medcounter - 1].expiryDate.Year;
+    cf << new_medicalsupply[medcounter - 1].expiryDate.Day << new_medicalsupply[medcounter - 1].expiryDate.Month << new_medicalsupply[medcounter - 1].expiryDate.Year << endl;
+    cin.ignore();
+    cout << "Enter name of supplier: ";
+    getline(cin, new_medicalsupply[medcounter - 1].SupplierName);
+    cf << new_medicalsupply[medcounter - 1].SupplierName << endl;
+    cout << "Enter Stock number: ";
+    cin >> new_medicalsupply[medcounter].Stock;
+    cf << new_medicalsupply[medcounter].Stock << endl;
+    cout << "Enter price: ";
+    cin >> new_medicalsupply[medcounter].Price;
+    cf << new_medicalsupply[medcounter].Price << endl;
+    cout << endl;
+    medcounter++;
+}
+
+void read_file(Customer customer[]) {
+        int count = 0, array_count = 0;
+        ifstream fs;
+        string line;
+        fs.open("customer.txt");
+        while (getline(fs, line))
+        {
+            if (count == 0)
+                customer[array_count].IDcust.no = std::stoi(line);
+            else if (count == 1)
+                customer[array_count].Name = line;
+            else if (count == 2)
+                customer[array_count].Phone = std::stoi(line);
+            else if (count == 3)
+                customer[array_count].purchasedProducts = line;
+            else if (count == 4)
+                customer[array_count].dateOfLastBill.Day = std::stoi(line);
+            else if (count == 5)
+                customer[array_count].its_value = std::stoi(line);
+            else if (count == 6)
+                customer[array_count].totalPriceOfBoughtProductsPerWeek = std::stoi(line);
+            count++;
+            if (count > 6)
+            {
+                count = 0;
+                array_count++;
+            }
+
+        }
+        fs.close();
+    
+}
+
+void update_customer() {
+    cout << "Enter phone number: ";
+    int temp,temp2 = 0; bool flag = false;
+    cin >> temp;
+    for (int i = 0; i < 100; i++) {
+        if (temp == new_customer[i].Phone) {
+            flag = true;
+            temp2 = i;
+            break;
+        }
+    }
+    if (flag == false) {
+        cout << "This customer is not found!" << endl;
+    }
+    else {
+        cout << new_customer[temp2].Name;
+    }
+}
 
 void mainmenu() {
     cout << "\t\t\t\t\tWelcome\n\n";
@@ -65,7 +193,7 @@ void mainmenu() {
     cout << "\t\t\t*********************************************\n";
 
     cout << "\n\tFor customers menu press C ";
-    cout << "\tFor products menu press P";
+    cout << "\tFor products menu press M";
     cout << "\tFor suppliers menu press S\n\n";
 
     cout << "\tENTER YOUR CHOICE: ";
@@ -79,10 +207,10 @@ void mainmenu() {
         cin.get(character2);
         cin.ignore();
         if (character2 == 'n' || character2 == 'N') {
-            cout << "\tadded\n";
+            add_customer();
         }
         else if (character2 == 'U' || character2 == 'u') {
-            cout << "\tupdated\n";
+            update_customer();
         }
     }
 
@@ -95,7 +223,7 @@ void mainmenu() {
         cin.get(character2);
         cin.ignore();
         if (character2 == 'w' || character2 == 'W') {
-            cout << "\tadded\n";
+            add_medicalsupply();
         }
         else if (character2 == 'e' || character2 == 'E') {
             cout << "\tupdated\n";
@@ -110,7 +238,7 @@ void mainmenu() {
         cin.get(character2);
         cin.ignore();
         if (character2 == 'r' || character2 == 'R') {
-            cout << "\tadded\n";
+            add_supplier();
         }
         else if (character2 == 'T' || character2 == 't') {
             cout << "\tupdated\n";
@@ -123,70 +251,10 @@ void mainmenu() {
     }
 }
 
-Customer add_customer() {
-	
-	new_customer[custcounter - 1].IDcust.no = custcounter;
-	cout << new_customer[custcounter - 1].IDcust.U << new_customer[custcounter - 1].IDcust.no << endl;
-	cout << "Enter customer name : ";
-	gets_s(new_customer[custcounter - 1].Name, 50);
-	cout << "Enter phone number : ";
-	cin >> new_customer[custcounter - 1].Phone;
-	cin.ignore();
-	cout << "Enter purchase products : ";
-	gets_s(new_customer[custcounter - 1].purchasedProducts, 100);
-	cout << "Enter date of last bill : ";
-	cin >> new_customer[custcounter - 1].dateOfLastBill.Day >> new_customer[custcounter - 1].dateOfLastBill.Month >> new_customer[custcounter - 1].dateOfLastBill.Year;
-	cout << "Enter its value : ";
-	cin >> new_customer[custcounter - 1].its_value;
-	cout << "Enter total price of bought products/week : ";
-	cin >> new_customer[custcounter - 1].totalPriceOfBoughtProductsPerWeek;
-    cout << endl;
-	custcounter++;
-	return new_customer[custcounter - 1];
-}
-
-Supplier add_supplier() {
-    new_supplier[supcounter - 1].IDsup.no = supcounter;
-    cout << new_supplier[supcounter - 1].IDsup.U << new_supplier[supcounter - 1].IDsup.no << endl;
-    cin.ignore();
-    cout << "Enter supplier name : ";
-    gets_s(new_supplier[supcounter - 1].Name, 50);
-    cout << "Enter phone number : ";
-    cin >> new_supplier[supcounter - 1].Phone;
-    cin.ignore();
-    cout << "Enter supplied products : ";
-    gets_s(new_supplier[supcounter - 1].suppliedMedicalProduct);
-    cout << endl;
-    supcounter++;
-    return new_supplier[supcounter - 1];
-}
-
-MedicalSupply add_medicalsupply() {
-    new_medicalsupply[medcounter - 1].IDmed.no = medcounter;
-    cout << new_medicalsupply[medcounter - 1].IDmed.U << new_medicalsupply[medcounter - 1].IDmed.no << endl;
-    cout << "Enter medical supply name : ";
-    gets_s(new_medicalsupply[medcounter - 1].Name, 50);
-    cout << "Enter date of expiry : ";
-    cin >> new_medicalsupply[medcounter - 1].expiryDate.Day >> new_medicalsupply[medcounter - 1].expiryDate.Month >> new_medicalsupply[medcounter - 1].expiryDate.Year;
-    cin.ignore();
-    cout << "Enter name of supplier: ";
-    gets_s(new_medicalsupply[medcounter - 1].SupplierName, 50);
-    cout << "Enter Stock number: ";
-    cin >> new_medicalsupply[medcounter].Stock;
-    cout << "Enter price: ";
-    cin >> new_medicalsupply[medcounter].Price;
-    cout << endl;
-    medcounter++;
-    return new_medicalsupply[medcounter - 1];
-}
-
 void main() {
+    Customer custom[100];
     mainmenu();
-	add_customer();
-    add_supplier();
-    add_medicalsupply();
+	
 }
 
 
-
- 
