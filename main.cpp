@@ -2,23 +2,10 @@
 #include <fstream>
 #include <string>
 #include <stdio.h>
+#include <ctime>
 using namespace std;
-int custcounter = 1, medcounter = 1, supcounter = 1;
+int custcounter = 1, medcounter = 1, supcounter = 1, temp = 0, counters[3] = {};
 char character, character2;
-struct idcust {
-	char U = 'U';
-	int no = 0;
-};
-
-struct idmed {
-	char U = 'M';
-	int no = 0;
-};
-
-struct idsup {
-	char U = 'S';
-	int no = 0;
-};
 
 struct Date {
 	int Day;
@@ -27,7 +14,7 @@ struct Date {
 };
 
 struct Customer {
-	idcust IDcust;
+	string IDcust = "U";
 	string Name;
 	int Phone = 0;
 	string purchasedProducts;
@@ -36,10 +23,10 @@ struct Customer {
 	int totalPriceOfBoughtProductsPerWeek = 0;
 };
 
-Customer new_customer[100];
+Customer custom[100];
 
 struct Supplier {
-	idsup IDsup;
+	string IDsup = "M";
 	string Name;
 	int Phone = 0;
 	string suppliedMedicalProduct;
@@ -48,7 +35,7 @@ struct Supplier {
 Supplier new_supplier[100];
 
 struct MedicalSupply {
-    idmed IDmed;
+    string IDmed = "S";
     string Name;
     Date expiryDate;
     string SupplierName;
@@ -59,41 +46,28 @@ struct MedicalSupply {
 MedicalSupply new_medicalsupply[100];
 
 void add_customer() {
-    ofstream cf;
-    cf.open("customer.txt", ios::app);
-	new_customer[custcounter - 1].IDcust.no = custcounter;
-	cout << new_customer[custcounter - 1].IDcust.U << new_customer[custcounter - 1].IDcust.no << endl;
-    cf << new_customer[custcounter - 1].IDcust.U << new_customer[custcounter - 1].IDcust.no << endl;
+	cout << custom[custcounter - 1].IDcust << custcounter << endl;
 	cout << "Enter customer name : ";
-	getline (cin, new_customer[custcounter - 1].Name);
-    cf << new_customer[custcounter - 1].Name << endl;
+	getline (cin, custom[custcounter - 1].Name);
 	cout << "Enter phone number : ";
-	cin >> new_customer[custcounter - 1].Phone;
+	cin >> custom[custcounter - 1].Phone;
 	cin.ignore();
-    cf << new_customer[custcounter - 1].Phone << endl;
 	cout << "Enter purchase products : ";
-	getline (cin, new_customer[custcounter - 1].purchasedProducts);
-    cf << new_customer[custcounter - 1].purchasedProducts << endl;
+	getline (cin, custom[custcounter - 1].purchasedProducts);
 	cout << "Enter date of last bill : ";
-	cin >> new_customer[custcounter - 1].dateOfLastBill.Day >> new_customer[custcounter - 1].dateOfLastBill.Month >> new_customer[custcounter - 1].dateOfLastBill.Year;
-    cf << new_customer[custcounter - 1].dateOfLastBill.Day << " " << new_customer[custcounter - 1].dateOfLastBill.Month << " " << new_customer[custcounter - 1].dateOfLastBill.Year << endl;
-	cout << "Enter its value : ";
-	cin >> new_customer[custcounter - 1].its_value;
-    cf << new_customer[custcounter - 1].its_value << endl;
+	cin >> custom[custcounter - 1].dateOfLastBill.Day >> custom[custcounter - 1].dateOfLastBill.Month >> custom[custcounter - 1].dateOfLastBill.Year;
+    cout << "Enter its value : ";
+	cin >> custom[custcounter - 1].its_value;
 	cout << "Enter total price of bought products/week : ";
-	cin >> new_customer[custcounter - 1].totalPriceOfBoughtProductsPerWeek;
-    cf << new_customer[custcounter - 1].totalPriceOfBoughtProductsPerWeek << endl;
-    cf.close();
-    cout << endl;
+	cin >> custom[custcounter - 1].totalPriceOfBoughtProductsPerWeek;
 	custcounter++;
 }
 
 void add_supplier() {
     ofstream cf;
     cf.open("supplier.txt", ios::app);
-    new_supplier[supcounter - 1].IDsup.no = supcounter;
-    cf << new_supplier[supcounter - 1].IDsup.U << new_supplier[supcounter - 1].IDsup.no << endl;
-    cout << new_supplier[supcounter - 1].IDsup.U << new_supplier[supcounter - 1].IDsup.no << endl;
+    cf << new_supplier[supcounter - 1].IDsup << supcounter << endl;
+    cout << new_supplier[supcounter - 1].IDsup << endl;
     cout << "Enter supplier name : ";
     getline(cin, new_supplier[supcounter - 1].Name);
     cf << new_supplier[supcounter - 1].Name << endl;
@@ -111,9 +85,8 @@ void add_supplier() {
 void add_medicalsupply() {
     ofstream cf;
     cf.open("medical_supply.txt", ios::app);
-    new_medicalsupply[medcounter - 1].IDmed.no = medcounter;
-    cf << new_medicalsupply[medcounter - 1].IDmed.U << new_medicalsupply[medcounter - 1].IDmed.no << endl;
-    cout << new_medicalsupply[medcounter - 1].IDmed.U << new_medicalsupply[medcounter - 1].IDmed.no << endl;
+    cf << new_medicalsupply[medcounter - 1].IDmed << endl;
+    cout << new_medicalsupply[medcounter - 1].IDmed << medcounter << endl;
     cout << "Enter medical supply name : ";
     getline(cin, new_medicalsupply[medcounter - 1].Name);
     cf << new_medicalsupply[medcounter - 1].Name << endl;
@@ -134,37 +107,53 @@ void add_medicalsupply() {
     medcounter++;
 }
 
-void read_file(Customer customer[]) {
-        int count = 0, array_count = 0;
+void read_customer_file(Customer customer[]) {
+    int count = 0, array_count = 0;
         ifstream fs;
         string line;
         fs.open("customer.txt");
+        
         while (getline(fs, line))
         {
             if (count == 0)
-                customer[array_count].IDcust.no = std::stoi(line);
-            else if (count == 1)
-                customer[array_count].Name = line;
-            else if (count == 2)
-                customer[array_count].Phone = std::stoi(line);
-            else if (count == 3)
-                customer[array_count].purchasedProducts = line;
-            else if (count == 4)
-                customer[array_count].dateOfLastBill.Day = std::stoi(line);
-            else if (count == 5)
-                customer[array_count].its_value = std::stoi(line);
-            else if (count == 6)
-                customer[array_count].totalPriceOfBoughtProductsPerWeek = std::stoi(line);
-            count++;
-            if (count > 6)
             {
-                count = 0;
-                array_count++;
+                customer[array_count].IDcust = line;
             }
+            else if (count == 1) {
+                customer[array_count].Name = line;
+            }
+            else if (count == 2) {
+                customer[array_count].Phone = std::stoi(line);
+            }
+            else if (count == 3) {
+                customer[array_count].purchasedProducts = line;
+            }
+            else if (count == 4) {
+                customer[array_count].dateOfLastBill.Day = std::stoi(line);
+            }
+            else if (count == 5) {
+                customer[array_count].dateOfLastBill.Month = std::stoi(line);
+            }
+            else if (count == 6) {
+                customer[array_count].dateOfLastBill.Year = std::stoi(line);
+            }
+            else if (count == 7) {
+                customer[array_count].its_value = std::stoi(line);
+            }
+            else {
+                customer[array_count].totalPriceOfBoughtProductsPerWeek = std::stoi(line);
+            }
+                count++;
 
+                if (count > 8)
+                {
+                    count = 0;
+                    array_count++;
+                }
+               
         }
         fs.close();
-    
+        
 }
 
 void update_customer() {
@@ -172,7 +161,7 @@ void update_customer() {
     int temp,temp2 = 0; bool flag = false;
     cin >> temp;
     for (int i = 0; i < 100; i++) {
-        if (temp == new_customer[i].Phone) {
+        if (temp == custom[i].Phone) {
             flag = true;
             temp2 = i;
             break;
@@ -182,8 +171,41 @@ void update_customer() {
         cout << "This customer is not found!" << endl;
     }
     else {
-        cout << new_customer[temp2].Name;
+        cout << "Customer name: " << custom[temp2].Name << endl;
+        cout << "Enter date of last bill: ";
+        cin >> custom[temp2].dateOfLastBill.Day >> custom[temp2].dateOfLastBill.Month >> custom[temp2].dateOfLastBill.Year;
+        cout << "Enter its value: ";
+        cin >> custom[temp2].its_value;
+        custom[temp2].totalPriceOfBoughtProductsPerWeek += custom[temp2].its_value;
+        cout << "Do you want to continue?";
     }
+}
+
+void write_customer_file() {
+    ofstream cf;
+    cf.open("customer.txt");
+    for (int i = 0; i < custcounter-1; i++) {
+        cf << custom[i].IDcust << custcounter-1 << endl;
+        cf << custom[i].Name << endl;
+        cf << custom[i].Phone << endl;
+        cf << custom[i].purchasedProducts << endl;
+        cf << custom[i].dateOfLastBill.Day << endl << custom[i].dateOfLastBill.Month << endl << custom[i].dateOfLastBill.Year << endl;
+        cf << custom[i].its_value << endl;
+        cf << custom[i].totalPriceOfBoughtProductsPerWeek << endl;
+    }
+    cf.close();
+}
+void read_counters() {
+    ifstream cf;
+    cf.open("counters.txt");
+    cf >> custcounter >> medcounter >> supcounter;
+    cf.close();
+}
+void write_counters() {
+    ofstream cf;
+    cf.open("counters.txt");
+    cf << custcounter << endl << medcounter << endl << supcounter;
+    cf.close();
 }
 
 void mainmenu() {
@@ -251,10 +273,13 @@ void mainmenu() {
     }
 }
 
-void main() {
-    Customer custom[100];
+int main() {
+    read_counters();
+    read_customer_file(custom);
     mainmenu();
-	
+    write_customer_file();
+    write_counters();
+    return 0;
 }
 
 
