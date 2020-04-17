@@ -195,6 +195,57 @@ void write_customer_file() {
     }
     cf.close();
 }
+void read_Medicalsupply_file(MedicalSupply medicalsupply[]) {
+    int count = 0, array_count = 0;
+    ifstream ms;
+    string line;
+    ms.open("Medicalsupply.txt");
+    while (getline(ms, line)) {
+        if (count == 0) {
+            medicalsupply[array_count].IDmed = line;
+        }
+        else if (count == 1) {
+            medicalsupply[array_count].Name = line;
+        }
+        else if (count == 2) {
+            medicalsupply[array_count].expiryDate.Day = std::stoi(line);
+        }
+        else if (count == 3) {
+            medicalsupply[array_count].expiryDate.Month = std::stoi(line);
+        }
+        else if (count == 4) {
+            medicalsupply[array_count].expiryDate.Year = std::stoi(line);
+        }
+        else if(count==5){
+            medicalsupply[array_count].SupplierName = line;
+        }
+        else if (count==6) {
+            medicalsupply[array_count].Stock = std::stoi(line);
+        }
+        else {
+            medicalsupply[array_count].Price = std::stoi(line);
+        }
+        count++;
+        if (count > 7) {
+            count = 0;
+            array_count++;
+        }
+    }
+    ms.close();
+}
+void write_Medicalsupply_file() {
+    ofstream mf;
+    mf.open("Medicalsupply.txt");
+    for (int i = 0; i < medcounter - 1; i++) {
+        mf << new_medicalsupply[i].IDmed << medcounter - 1 << endl;
+        mf << new_medicalsupply[i].Name << endl;
+        mf << new_medicalsupply[i].expiryDate.Day << endl << new_medicalsupply[i].expiryDate.Month << endl << new_medicalsupply[i].expiryDate.Year << endl;
+        mf << new_medicalsupply[i].SupplierName << endl;
+        mf << new_medicalsupply[i].Stock << endl;
+        mf << new_medicalsupply[i].Price << endl;
+    }
+    mf.close();
+}
 void read_counters() {
     ifstream cf;
     cf.open("counters.txt");
@@ -278,6 +329,8 @@ int main() {
     read_customer_file(custom);
     mainmenu();
     write_customer_file();
+    read_Medicalsupply_file(new_medicalsupply);
+    write_Medicalsupply_file();
     write_counters();
     return 0;
 }
