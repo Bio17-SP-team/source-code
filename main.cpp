@@ -246,6 +246,81 @@ void write_Medicalsupply_file() {
     }
     mf.close();
 }
+void read_supplier_file(Supplier supplier[])
+{
+    int count = 0, array_count = 0;
+    ifstream fs;
+    string line;
+    fs.open("supplier.txt");
+    while (getline(fs, line))
+    {
+        if (count == 0)
+        {
+            supplier[array_count].IDsup = line;
+        }
+        else if (count == 1)
+        {
+            supplier[array_count].Name = line;
+        }
+        else if (count == 2)
+        {
+            supplier[array_count].Phone = std::stoi(line);
+        }
+        else if (count == 3)
+        {
+            supplier[array_count].suppliedMedicalProduct = line;
+        }
+        count++;
+        if (count > 3)
+        {
+            count = 0;
+            array_count++;
+        }
+    }
+    fs.close();
+}
+void update_supplier()
+{
+    cout << "Enter Name of Supplier:";
+    string temp1, temp3;
+    int temp2 = 0; bool flag = false;
+    cin >> temp1;
+    for (int i = 0; i < 100; i++)
+    {
+        if (temp1 == new_supplier[i].Name)
+        {
+            flag = true;
+            temp2 = i;
+            break;
+        }
+    }
+    if (flag == false)
+    {
+        cout << "This supplier is not found!" << endl;
+    }
+    else
+    {
+        cout << "supplier phone:" << new_supplier[temp2].Phone << endl;
+        cout << "supplied medical product:";
+        cin >> temp3;
+        new_supplier[temp2].suppliedMedicalProduct += " ";
+        new_supplier[temp2].suppliedMedicalProduct += temp3;
+        cout << "Do you want to continue?";
+    }
+}
+void write_supplier_file()
+{
+    ofstream cf;
+    cf.open("supplier.txt");
+    for (int i = 0; i < supcounter - 1; i++)
+    {
+        cf << new_supplier[i].IDsup << supcounter - 1 << endl;
+        cf << new_supplier[i].Name << endl;
+        cf << new_supplier[i].Phone << endl;
+        cf << new_supplier[i].suppliedMedicalProduct << endl;
+    }
+    cf.close();
+}
 void read_counters() {
     ifstream cf;
     cf.open("counters.txt");
@@ -314,7 +389,7 @@ void mainmenu() {
             add_supplier();
         }
         else if (character2 == 'T' || character2 == 't') {
-            cout << "\tupdated\n";
+            update_supplier();
         }
     }
 
@@ -327,10 +402,12 @@ void mainmenu() {
 int main() {
     read_counters();
     read_customer_file(custom);
+    read_Medicalsupply_file(new_medicalsupply);
+    read_supplier_file(new_supplier);
     mainmenu();
     write_customer_file();
-    read_Medicalsupply_file(new_medicalsupply);
     write_Medicalsupply_file();
+    write_supplier_file();
     write_counters();
     return 0;
 }
