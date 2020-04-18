@@ -26,7 +26,7 @@ struct Customer {
 Customer custom[100];
 
 struct Supplier {
-	string IDsup = "M";
+	string IDsup = "S";
 	string Name;
 	int Phone = 0;
 	string suppliedMedicalProduct;
@@ -35,7 +35,7 @@ struct Supplier {
 Supplier new_supplier[100];
 
 struct MedicalSupply {
-    string IDmed = "S";
+    string IDmed = "M";
     string Name;
     Date expiryDate;
     string SupplierName;
@@ -86,9 +86,9 @@ void add_medicalsupply() {
     cout << "Enter name of supplier: ";
     getline(cin, new_medicalsupply[medcounter - 1].SupplierName);
     cout << "Enter Stock number: ";
-    cin >> new_medicalsupply[medcounter].Stock;
+    cin >> new_medicalsupply[medcounter-1].Stock;
     cout << "Enter price: ";
-    cin >> new_medicalsupply[medcounter].Price;
+    cin >> new_medicalsupply[medcounter-1].Price;
     cout << endl;
     medcounter++;
 }
