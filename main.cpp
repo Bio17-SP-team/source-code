@@ -64,45 +64,31 @@ void add_customer() {
 }
 
 void add_supplier() {
-    ofstream cf;
-    cf.open("supplier.txt", ios::app);
-    cf << new_supplier[supcounter - 1].IDsup << supcounter << endl;
     cout << new_supplier[supcounter - 1].IDsup << endl;
     cout << "Enter supplier name : ";
     getline(cin, new_supplier[supcounter - 1].Name);
-    cf << new_supplier[supcounter - 1].Name << endl;
     cout << "Enter phone number : ";
     cin >> new_supplier[supcounter - 1].Phone;
-    cf << new_supplier[supcounter - 1].Phone << endl;
     cin.ignore();
     cout << "Enter supplied products : ";
     getline(cin, new_supplier[supcounter - 1].suppliedMedicalProduct);
-    cf << new_supplier[supcounter - 1].suppliedMedicalProduct << endl;
     cout << endl;
     supcounter++;
 }
 
 void add_medicalsupply() {
-    ofstream cf;
-    cf.open("medical_supply.txt", ios::app);
-    cf << new_medicalsupply[medcounter - 1].IDmed << endl;
     cout << new_medicalsupply[medcounter - 1].IDmed << medcounter << endl;
     cout << "Enter medical supply name : ";
     getline(cin, new_medicalsupply[medcounter - 1].Name);
-    cf << new_medicalsupply[medcounter - 1].Name << endl;
     cout << "Enter date of expiry : ";
     cin >> new_medicalsupply[medcounter - 1].expiryDate.Day >> new_medicalsupply[medcounter - 1].expiryDate.Month >> new_medicalsupply[medcounter - 1].expiryDate.Year;
-    cf << new_medicalsupply[medcounter - 1].expiryDate.Day << new_medicalsupply[medcounter - 1].expiryDate.Month << new_medicalsupply[medcounter - 1].expiryDate.Year << endl;
     cin.ignore();
     cout << "Enter name of supplier: ";
     getline(cin, new_medicalsupply[medcounter - 1].SupplierName);
-    cf << new_medicalsupply[medcounter - 1].SupplierName << endl;
     cout << "Enter Stock number: ";
     cin >> new_medicalsupply[medcounter].Stock;
-    cf << new_medicalsupply[medcounter].Stock << endl;
     cout << "Enter price: ";
     cin >> new_medicalsupply[medcounter].Price;
-    cf << new_medicalsupply[medcounter].Price << endl;
     cout << endl;
     medcounter++;
 }
