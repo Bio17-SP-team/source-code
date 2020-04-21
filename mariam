@@ -3,10 +3,24 @@
 #include<cstdio> 
 using namespace std;
 char character ;
-
+int updatedtime;
+int updatedday;
+int updateddate;
    void mainmenu(char character);
    int main () 
- { 
+ {  time_t tt; 
+  
+    // Declaring variable to store return value of 
+    // localtime() 
+    struct tm * ti; 
+  
+    // Applying time() 
+    time (&tt); 
+  
+    // Using localtime() 
+    ti = localtime(&tt); 
+  
+  updateddate = asctime(ti); 
   cout<<"\t\t\t\t\t\t\t~~~~`Welcome`~~~~\n";
  cout<<"\t\t\t\t\t\t\tBio*17 Pharma Store\n";
 
