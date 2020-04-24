@@ -89,22 +89,22 @@ int main()
 
 
  time_t t = time(NULL);
- tm* tPtr = localtime(&t);
+ tm* Ptr = localtime(&t);
  
 
- int seconds = (tPtr->tm_sec);
- int minutes =  (tPtr->tm_min) ;
- int hours =  (tPtr->tm_hour) ;
+ int seconds = (Ptr->tm_sec);
+ int minutes =  (Ptr->tm_min) ;
+ int hours =  (Ptr->tm_hour) ;
 int dayofmonth =  (tPtr->tm_mday) ;
- int monthofyear =  (tPtr->tm_mon)+1 ;
-int  year = (tPtr->tm_year)+1900;
- int weekday = (tPtr->tm_wday );
- int dayofyear =  (tPtr->tm_yday );
+ int monthofyear =  (Ptr->tm_mon)+1 ;
+int  year = (Ptr->tm_year)+1900;
+ int weekday = (Ptr->tm_wday );
+ int dayofyear =  (Ptr->tm_yday );
 
 
 
  
- cout << seconds  << endl;
+
  cout << minutes   << endl;
  cout <<hours  << endl;
  cout <<dayofmonth << endl;
