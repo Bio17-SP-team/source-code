@@ -8,17 +8,16 @@ int updatedday;
 int updateddate;
    void mainmenu(char character);
    int main () 
- {  time_t tt; 
+
   
-    // Declaring variable to store return value of 
-    // localtime() 
-    struct tm * ti; 
+    
+   
   
-    // Applying time() 
-    time (&tt); 
+   
+    
   
-    // Using localtime() 
-    ti = localtime(&tt); 
+   
+  
   
   updateddate = asctime(ti); 
   cout<<"\t\t\t\t\t\t\t~~~~`Welcome`~~~~\n";
@@ -73,3 +72,56 @@ int updateddate;
      cout<<"INVALIDE CHOICE,PLEASE TRY AGAIN";
      break;
     }}
+
+
+
+===========================================================================================================================================
+
+#include<iostream>
+
+#include <ctime>
+using namespace std;
+int main()
+{
+
+
+
+
+
+ time_t t = time(NULL);
+ tm* tPtr = localtime(&t);
+ 
+
+ int seconds = (tPtr->tm_sec);
+ int minutes =  (tPtr->tm_min) ;
+ int hours =  (tPtr->tm_hour) ;
+int dayofmonth =  (tPtr->tm_mday) ;
+ int monthofyear =  (tPtr->tm_mon)+1 ;
+int  year = (tPtr->tm_year)+1900;
+ int weekday = (tPtr->tm_wday );
+ int dayofyear =  (tPtr->tm_yday );
+
+
+
+ 
+ cout << seconds  << endl;
+ cout << minutes   << endl;
+ cout <<hours  << endl;
+ cout <<dayofmonth << endl;
+ cout <<monthofyear << endl;
+ cout <<year << endl;
+ cout << weekday << endl;
+ cout <<dayofyear << endl;
+ 
+    
+    
+    
+    
+   
+
+    return 0;
+}
+
+
+
+
